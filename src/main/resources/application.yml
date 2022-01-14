@@ -23,7 +23,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity의 변수명 그대로 테이블의 컬럼을 만든다.
       use-new-id-generator-mappings: false # ID넘버링의 JPA의 기본전략을 따라가지 않는다.
