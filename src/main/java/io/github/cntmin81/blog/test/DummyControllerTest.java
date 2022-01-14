@@ -1,6 +1,11 @@
 package io.github.cntmin81.blog.test;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +21,16 @@ public class DummyControllerTest {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@GetMapping("/dummy/user/page")
+	public List<User> pageList(@PageableDefault(size = 2, sort = "id", direction = Direction.DESC) org.springframework.data.domain.Pageable pageable) {
+		return userRepository.findAll(pageable).getContent();
+	}
+	
+	@GetMapping("/dummy/user")
+	public List<User> list() {
+		return userRepository.findAll();
+	}
 	
 	@GetMapping("/dummy/user/{id}")
 	public User detail(@PathVariable int id) {
