@@ -21,7 +21,7 @@ public class UserApiController {
 	public ResponseDto<Integer> save(@RequestBody User user) {
 		System.out.println("UserAPIController save called");
 		user.setRole(RoleType.USER);
-		int result = userService.joinMember(user);
-		return new ResponseDto<Integer>(HttpStatus.OK, result);
+		userService.joinMember(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 }

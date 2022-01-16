@@ -19,16 +19,8 @@ public class UserService {
 	private UserRepository userRepository;
 
 	@Transactional
-	public int joinMember(User user) {
-		try {
-			userRepository.save(user);
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("UserService: joinMember(): " + e.getMessage());
-		}
-		return -1;
+	public void joinMember(User user) {
+		userRepository.save(user);
 	}
 
 }
-
