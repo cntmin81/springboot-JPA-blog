@@ -2,7 +2,7 @@
 
 <%@ include file="../layout/header.jsp"%>
 <div class="container">
-  <form action="/action_page.php">
+  <form>
     <div class="form-group">
       <label for="username">User name:</label>
       <input type="text" class="form-control" placeholder="Enter User name" id="username">
