@@ -2,9 +2,11 @@ package io.github.cntmin81.blog.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.github.cntmin81.blog.model.RoleType;
 import io.github.cntmin81.blog.model.User;
 import io.github.cntmin81.blog.repository.UserRepository;
 
@@ -17,16 +19,23 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 
 	@Transactional
 	public void joinMember(User user) {
+		String rawPassword = user.getPassword();
+		String encPassword = encoder.encode(rawPassword);
+		user.setPassword(encPassword);
+		user.setRole(RoleType.USER);
 		userRepository.save(user);
 	}
 
-	@Transactional(readOnly = true) // select 할태 트랜젝션시작, 서비스 종료시에 트랜젝션 종료 (정합성)
-	public User login(User user) {
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-	}
+//	@Transactional(readOnly = true) // select 할태 트랜젝션시작, 서비스 종료시에 트랜젝션 종료 (정합성)
+//	public User login(User user) {
+//		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//	}
 
 }
