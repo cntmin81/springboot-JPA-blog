@@ -49,9 +49,9 @@ public class DummyControllerTest {
 	}
 
 	@GetMapping("/dummy/user/page")
-	public List<User> pageList(
+	public Page<User> pageList(
 			@PageableDefault(size = 2, sort = "id", direction = Direction.DESC) org.springframework.data.domain.Pageable pageable) {
-		return userRepository.findAll(pageable).getContent();
+		return userRepository.findAll(pageable);
 	}
 
 	@GetMapping("/dummy/user")

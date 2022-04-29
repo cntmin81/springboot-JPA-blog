@@ -1,6 +1,8 @@
 package io.github.cntmin81.blog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,9 @@ public class BoardController {
 	// 컴트롤러에서 세션을 어떻게 찾는지?
 	// public String index(@AuthenticationPrincipal PrincipalDetail principal) {
 	@GetMapping({ "", "/" })
-	public String index(Model model) {
+	public String index(Model model, @PageableDefault(size = 3, sort = "id", direction = Direction.DESC) org.springframework.data.domain.Pageable pageable) {
 		// System.out.println("로그인 사용자 아이디 : " + principal.getUsername());
-		model.addAttribute("boards", boardService.getAllList());
+		model.addAttribute("boards", boardService.getAllList(pageable));
 		return "index";
 	}
 
