@@ -39,6 +39,10 @@ public class BoardService {
 		});
     }
 
+	public void deleteById(int id) {
+		boardRepository.deleteById(id);
+	}
+
 	// @Transactional(readOnly = true) // select 할태 트랜젝션시작, 서비스 종료시에 트랜젝션 종료 (정합성)
 	// public User login(User user) {
 	// return userRepository.findByUsernameAndPassword(user.getUsername(),

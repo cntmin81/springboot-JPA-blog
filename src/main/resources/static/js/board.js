@@ -3,6 +3,9 @@ let index = {
 		$("#btn-save").on("click", () => {
 			this.save();
 		});
+		$("#btn-delete").on("click", () => {
+			this.deleteById();
+		});
 		//$("#btn-login").on("click", () => {
 		//	this.login();
 		//});
@@ -24,6 +27,20 @@ let index = {
 		})
 			.done(function(resp) {
 				alert("글쓰기완료 ");
+				location.href = "/";
+			})
+			.fail(function(error) {
+				alert(JSON.stringify(error));
+			});
+	},
+	deleteById: function() {
+		let id = $("#id").text();
+		$.ajax({
+			type: "DELETE",
+			url: "/api/board/" + id
+		})
+			.done(function(resp) {
+				alert("글삭제완료");
 				location.href = "/";
 			})
 			.fail(function(error) {
