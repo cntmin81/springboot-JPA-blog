@@ -6,6 +6,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import io.github.cntmin81.blog.service.BoardService;
 
@@ -22,6 +23,12 @@ public class BoardController {
 		// System.out.println("로그인 사용자 아이디 : " + principal.getUsername());
 		model.addAttribute("boards", boardService.getAllList(pageable));
 		return "index";
+	}
+
+	@GetMapping("/board/{id}")
+	public String detail(Model model, @PathVariable("id") int id) {
+		model.addAttribute("board", boardService.getOne(id));
+		return "board/detail";
 	}
 
 	// USER권한이필요

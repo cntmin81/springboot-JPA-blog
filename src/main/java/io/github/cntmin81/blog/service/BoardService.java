@@ -33,6 +33,12 @@ public class BoardService {
 		return boardRepository.findAll(pageable);
 	}
 
+    public Board getOne(int id) {
+        return boardRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+    }
+
 	// @Transactional(readOnly = true) // select 할태 트랜젝션시작, 서비스 종료시에 트랜젝션 종료 (정합성)
 	// public User login(User user) {
 	// return userRepository.findByUsernameAndPassword(user.getUsername(),
