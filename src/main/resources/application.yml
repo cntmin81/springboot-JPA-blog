@@ -28,7 +28,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity의 변수명 그대로 테이블의 컬럼을 만든다.
       use-new-id-generator-mappings: false # ID넘버링의 JPA의 기본전략을 따라가지 않는다.
-    show-sql: true # 로그에서 sql을 표시
+    #show-sql: true # 로그에서 sql을 표시
     properties:
       hibernate.format_sql: true # 포맷된 sql을 로그에 표시
 

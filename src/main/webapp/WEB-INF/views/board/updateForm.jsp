@@ -3,18 +3,15 @@
 <%@ include file="../layout/header.jsp"%>
 <div class="container">
   <form action="/auth/loginProc" method="post">
+    <input type="hidden" id="id" value="${board.id}"/>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Enter Title" id="title">
+      <input type="text" class="form-control" placeholder="Enter Title" id="title" value="${board.title}">
     </div>
     <div class="form-group">
-      <textarea class="form-control summernote" rows="5" cols="" id="content"></textarea>
+      <textarea class="form-control summernote" rows="5" cols="" id="content">${board.content}</textarea>
     </div>
-    <!-- <div class="form-group form-check">
-      <label class="form-check-label"> <input name="remember" class="form-check-input" type="checkbox"> Remember me
-      </label>
-    </div> -->
   </form>
-  <button id="btn-save" class="btn btn-primary">글쓰기완료</button>
+  <button id="btn-update" class="btn btn-primary">글수정완료</button>
   
 </div>
 <script>

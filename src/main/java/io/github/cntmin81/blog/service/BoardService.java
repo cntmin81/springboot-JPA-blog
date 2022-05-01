@@ -29,19 +29,29 @@ public class BoardService {
 		boardRepository.save(board);
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Board> getAllList(Pageable pageable) {
 		return boardRepository.findAll(pageable);
 	}
 
+	@Transactional(readOnly = true)
     public Board getOne(int id) {
         return boardRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
 		});
     }
 
+	@Transactional
 	public void deleteById(int id) {
 		boardRepository.deleteById(id);
 	}
+
+	@Transactional
+    public void updateById(int id, Board requestBoard) {
+		Board board = boardRepository.findById(id).orElseThrow(() -> {return new IllegalArgumentException("글 업데이트 실패 : 아이디를 찾을 수 없습니다.");});
+		board.setTitle(requestBoard.getTitle());
+		board.setContent(requestBoard.getContent());
+    }
 
 	// @Transactional(readOnly = true) // select 할태 트랜젝션시작, 서비스 종료시에 트랜젝션 종료 (정합성)
 	// public User login(User user) {
