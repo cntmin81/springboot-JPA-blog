@@ -36,7 +36,7 @@ public class UserService {
 	@Transactional
     public void updateMember(User user) {
 		// 유저를 셀렉트 하는 이유는 영속화 하기 위해서
-		// 영속화 된  객체를 변경해주면 자동으로 디비에 업데이트된다.
+		// 영속화 된 객체를 변경해주면 자동으로 디비에 업데이트된다.
 		User persistence = userRepository.findById(user.getId()).orElseThrow(() -> {
 			return new IllegalArgumentException("회원정보 찾기 실패");
 		});
