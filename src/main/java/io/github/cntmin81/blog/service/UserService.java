@@ -33,6 +33,19 @@ public class UserService {
 		userRepository.save(user);
 	}
 
+	@Transactional
+    public void updateMember(User user) {
+		// 유저를 셀렉트 하는 이유는 영속화 하기 위해서
+		// 영속화 된  객체를 변경해주면 자동으로 디비에 업데이트된다.
+		User persistence = userRepository.findById(user.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("회원정보 찾기 실패");
+		});
+		String rawPassword = user.getPassword();
+		String encPassword = encoder.encode(rawPassword);
+		persistence.setPassword(encPassword);
+		persistence.setEmail(user.getEmail());
+    }
+
 //	@Transactional(readOnly = true) // select 할태 트랜젝션시작, 서비스 종료시에 트랜젝션 종료 (정합성)
 //	public User login(User user) {
 //		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());

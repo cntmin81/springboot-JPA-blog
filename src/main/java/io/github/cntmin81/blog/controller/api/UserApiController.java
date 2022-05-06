@@ -24,6 +24,12 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 
+	@PostMapping("/user/update")
+	public ResponseDto<Integer> update(@RequestBody User user) {
+		userService.updateMember(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+
 //	@PostMapping("/api/user/login")
 //	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
 //		System.out.println("UserAPIController login called");
